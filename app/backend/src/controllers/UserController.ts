@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-// import { StatusCodes } from 'http-status-codes';
 import UserService from '../services/UserService';
 
 export default class UserController {
@@ -11,15 +10,11 @@ export default class UserController {
       const token = await this._userService.login(dateUser);
       if (!token) {
         return res.status(401)
-          .json({ message: 'email ou password invalido' });
+          .json({ message: 'Incorrect email or password' });
       }
       return res.status(200).json({ token });
     } catch (e) {
-      const erro = (e as Error).message;
-      return res.status(500).json({
-        message: 'Erro ao realizar login',
-        erro,
-      });
+      return res.status(500).json((e as Error).message);
     }
   };
 }
