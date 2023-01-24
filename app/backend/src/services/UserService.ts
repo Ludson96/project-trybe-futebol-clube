@@ -25,7 +25,6 @@ export default class UsersService {
     }
 
     const token = jwt.createToken(user);
-    console.log('Eu sou o token: ', token);
 
     return token;
   }
