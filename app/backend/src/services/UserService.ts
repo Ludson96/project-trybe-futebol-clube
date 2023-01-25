@@ -26,4 +26,13 @@ export default class UsersService {
 
     return token;
   }
+
+  public async getRole(email: string) {
+    const selectedUser = await this.usersModel.findOne({ where: { email } });
+
+    if (!selectedUser) {
+      return { type: undefined };
+    }
+    return { type: selectedUser.role };
+  }
 }
