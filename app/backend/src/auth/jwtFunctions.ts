@@ -6,7 +6,7 @@ export default class JWT {
   private _jwtConfig: object;
 
   constructor() {
-    this._secret = process.env.JWT_SECRET || 'jwt_secret';
+    this._secret = 'jwt_secret';
     this._jwtConfig = {
       algorithm: 'HS256',
       expiresIn: '7d',
@@ -18,12 +18,8 @@ export default class JWT {
     return token;
   }
 
-  public verifyToken(authorization: string) {
-    try {
-      const payload = jwt.verify(authorization, this._secret);
-      return payload;
-    } catch (e) {
-      return { isError: true, e };
-    }
-  }
+  // public verifyToken(authorization: string) {
+  //   const payload = jwt.verify(authorization, this._secret);
+  //   return payload;
+  // }
 }
