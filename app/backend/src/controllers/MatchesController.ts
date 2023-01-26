@@ -4,8 +4,11 @@ import MatchesService from '../services/MatchesService';
 export default class MatchesController {
   constructor(public matchesService = new MatchesService()) {}
 
-  public getMatches = async (_req: Request, res: Response) => {
-    const matches = await this.matchesService.getMatches();
+  public getMatches = async (req: Request, res: Response) => {
+    const { inProgress } = req.query;
+    console.log('Eu sou inProgress: ', inProgress);
+
+    const matches = await this.matchesService.getMatches(inProgress as string | undefined);
     return res.status(200).json(matches);
   };
 }
