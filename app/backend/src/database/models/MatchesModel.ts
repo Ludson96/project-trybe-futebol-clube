@@ -1,6 +1,6 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
-// import OtherModel from './OtherModel';
+import TeamsModel from './TeamsModel';
 
 class Matches extends Model {
   declare id: number;
@@ -46,10 +46,10 @@ Matches.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-// OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
-// OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
+TeamsModel.hasMany(Matches, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+TeamsModel.hasMany(Matches, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
-// Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
-// Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
+Matches.belongsTo(TeamsModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+Matches.belongsTo(TeamsModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
 export default Matches;
