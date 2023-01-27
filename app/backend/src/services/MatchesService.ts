@@ -15,8 +15,6 @@ export default class MatchesService {
       }
     }
 
-    console.log('Eu sou where: ', where);
-
     const matches = await this.matchesModel.findAll({
       where,
       include: [
@@ -27,8 +25,20 @@ export default class MatchesService {
     return matches;
   }
 
+  public async verifyTeam(homeTeamId: number, awayTeamId: number) {
+    const homeTeam = await this.matchesModel.findByPk(homeTeamId);
+    const awayTeam = await this.matchesModel.findByPk(awayTeamId);
+    if (homeTeam && awayTeam) return false;
+    return true;
+  }
+
   public async createMatche(matche: IMatche) {
     const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = matche;
+    if (homeTeamId === awayTeamId) {
+      return { status: 422, message: 'It is not possible to create a match with two equal teams' };
+    }
+    const verify = await this.verifyTeam(homeTeamId, awayTeamId);
+    if (verify) return { status: 404, message: 'There is no team with such id!' };
     const newMatch = await
     this.matchesModel.create({
       homeTeamId,
@@ -37,7 +47,7 @@ export default class MatchesService {
       awayTeamGoals,
       inProgress: true,
     });
-    return newMatch;
+    return { status: 201, message: newMatch };
   }
 
   public async finish(id: number) {

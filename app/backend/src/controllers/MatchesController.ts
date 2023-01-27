@@ -6,15 +6,16 @@ export default class MatchesController {
 
   public getMatches = async (req: Request, res: Response) => {
     const { inProgress } = req.query;
-    console.log('Eu sou inProgress: ', inProgress);
-
     const matches = await this.matchesService.getMatches(inProgress as string | undefined);
     return res.status(200).json(matches);
   };
 
   public createMatche = async (req: Request, res: Response) => {
-    const newMatche = await this.matchesService.createMatche(req.body);
-    return res.status(201).json(newMatche);
+    const { status, message } = await this.matchesService.createMatche(req.body);
+    if (status !== 201) {
+      return res.status(status).json({ message });
+    }
+    return res.status(status).json(message);
   };
 
   public finish = async (req: Request, res: Response) => {
