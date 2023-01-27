@@ -39,4 +39,8 @@ export default class MatchesService {
     });
     return newMatch;
   }
+
+  public async finish(id: number) {
+    await this.matchesModel.update({ inProgress: false }, { where: { id } });
+  }
 }

@@ -10,4 +10,6 @@ router.get('/', matchesController.getMatches);
 
 router.post('/', validateJwt.validateToken, matchesController.createMatche);
 
+router.patch('/:id/finish', matchesController.finish);
+
 export default router;
