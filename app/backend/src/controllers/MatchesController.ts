@@ -27,6 +27,6 @@ export default class MatchesController {
     const { id } = req.params;
     const dataUpdated = req.body;
     await this.matchesService.updateMatche(dataUpdated, Number(id));
-    return res.status(200).json({ message: 'Partida atualizada com sucesso!' });
+    return res.status(200).json({ message: 'Partida atualizada com sucesso!!' });
   };
 }
