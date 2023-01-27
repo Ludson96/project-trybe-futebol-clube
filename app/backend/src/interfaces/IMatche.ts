@@ -4,3 +4,8 @@ export default interface IMatche {
   homeTeamGoals: number,
   awayTeamGoals: number,
 }
+
+export interface IMatcheUpdated {
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+}

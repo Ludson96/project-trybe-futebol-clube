@@ -1,6 +1,6 @@
 import MatchesModel from '../database/models/MatchesModel';
 import TeamModel from '../database/models/TeamsModel';
-import IMatche from '../interfaces/IMatche';
+import IMatche, { IMatcheUpdated } from '../interfaces/IMatche';
 
 export default class MatchesService {
   constructor(public matchesModel = MatchesModel) { }
@@ -53,4 +53,7 @@ export default class MatchesService {
   public async finish(id: number) {
     await this.matchesModel.update({ inProgress: false }, { where: { id } });
   }
+
+  public updateMatche = async ({ homeTeamGoals, awayTeamGoals }: IMatcheUpdated, id: number) =>
+    this.matchesModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
 }
