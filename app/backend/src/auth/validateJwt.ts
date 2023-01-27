@@ -6,7 +6,7 @@ export default class validateJwt {
     const secret = 'jwt_secret';
     const token = req.header('Authorization');
 
-    if (!token) return res.status(401).json({ message: 'token not found' });
+    if (!token) return res.status(401).json({ message: 'Token inexistente' });
 
     try {
       const user = jwt.verify(token, secret);
@@ -14,7 +14,7 @@ export default class validateJwt {
       req.body.user = user;
       return next();
     } catch (e) {
-      return res.status(401).json({ message: 'Invalid token' });
+      return res.status(401).json({ message: 'Token must be a valid token' });
     }
   }
 }
