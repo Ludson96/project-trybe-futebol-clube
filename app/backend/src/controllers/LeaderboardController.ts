@@ -4,15 +4,13 @@ import LeaderboardService from '../services/LeaderboardService';
 export default class LeaderboardController {
   constructor(public leaderboardService = new LeaderboardService()) {}
 
-  public getAllMatchesHome = async (req: Request, res: Response) => {
-    const { local } = req.params;
-    const leaderHome = await this.leaderboardService.getLeaderBoardLocal(local as 'home' | 'away');
+  public getAllMatchesHome = async (_req: Request, res: Response) => {
+    const leaderHome = await this.leaderboardService.getLeaderBoardLocal('home');
     return res.status(200).json(leaderHome);
   };
 
-  public getAllMatchesAway = async (req: Request, res: Response) => {
-    const { local } = req.params;
-    const leaderAway = await this.leaderboardService.getLeaderBoardLocal(local as 'home' | 'away');
+  public getAllMatchesAway = async (_req: Request, res: Response) => {
+    const leaderAway = await this.leaderboardService.getLeaderBoardLocal('away');
     return res.status(200).json(leaderAway);
   };
 
