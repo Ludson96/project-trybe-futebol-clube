@@ -30,13 +30,13 @@ export interface ITeam {
   teamName: string;
 }
 
-export interface IPoints {
+export interface IPontos {
   homeTeam: number;
   awayTeam: number;
   win: string;
 }
 
-export interface IMatch {
+export interface IPartida {
   id: number;
   homeTeamId: number;
   awayTeamId: number;
@@ -45,7 +45,7 @@ export interface IMatch {
   inProgress?: boolean;
 }
 
-export interface ILeaderboard {
+export interface ILeader {
   name: string;
   totalPoints: number;
   totalGames: number;
