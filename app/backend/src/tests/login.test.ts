@@ -131,7 +131,7 @@ describe('Teste User', function() {
       .set({Authorization: 'token'});
 
       expect(chaiHttpResponse.status).to.be.equal(401);
-      expect(chaiHttpResponse.body).to.deep.equal({ message: 'Invalid token' })
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token must be a valid token' })
     });
 
     it('Token inexistente', async () => {
@@ -144,7 +144,7 @@ describe('Teste User', function() {
       .get('/login/validate')
 
       expect(chaiHttpResponse.status).to.be.equal(401);
-      expect(chaiHttpResponse.body).to.deep.equal({ message: 'token not found' })
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token inexistente' })
     });
   });
 });
